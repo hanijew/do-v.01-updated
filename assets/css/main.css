@@ -238,11 +238,14 @@ h6 {
     display: flex;
     list-style: none;
     align-items: center;
+    justify-content: flex-start;
   }
 
   .navmenu li {
     position: relative;
+    
   }
+  
 
   .navmenu a,
   .navmenu a:focus {
@@ -278,27 +281,68 @@ h6 {
 
   .navmenu .dropdown ul {
     margin: 0;
-    padding: 10px 0;
+    padding: 0; /* Corrected padding */
     background: var(--nav-dropdown-background-color);
     display: block;
     position: absolute;
     visibility: hidden;
-    left: 14px;
-    top: 130%;
+    left: 0; /* Align dropdown with parent */
+    top: 100%; /* Position below parent */
     opacity: 0;
-    transition: 0.3s;
+    transition: opacity 0.3s, visibility 0.3s;
     border-radius: 0;
-    z-index: 99;
+    z-index: 1; /* Ensure proper stacking */
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
   }
 
-  .navmenu .dropdown ul li {
-    min-width: 200px;
+  .navmenu .dropdown .dropdown ul {
+    left: 100%; /* Position nested dropdown to the right */
+    top: 0; /* Align with parent dropdown */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+  }
+
+  .navmenu .dropdown:hover > ul {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .navmenu .dropdown ul li:hover > ul {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .navmenu .dropdown > a {
+    display: flex; /* Ensures the text and icon are aligned */
+    align-items: center; /* Vertically centers the text and icon */
+    justify-content: space-between; /* Adds space between the text and icon */
+    padding: 10px 15px; /* Adjust padding for consistent spacing */
+  }
+
+  .navmenu .dropdown > a i {
+    margin-left: auto; /* Pushes the icon to the far right */
+    font-size: 12px; /* Ensures consistent icon size */
+    line-height: 0; /* Prevents extra spacing */
+    transition: transform 0.3s; /* Adds a smooth transition for dropdown toggle */
   }
 
   .navmenu .dropdown ul a {
-    padding: 10px 20px;
-    font-size: 15px;
+    display: flex; /* Ensures alignment for nested dropdowns */
+    align-items: center; /* Vertically centers the text and icon */
+    justify-content: space-between; /* Adds space between the text and icon */
+    padding: 10px 15px; /* Adjust padding for consistent spacing */
+  }
+
+  .navmenu .dropdown ul a i {
+    margin-left: auto; /* Pushes the icon to the far right */
+    font-size: 12px; /* Ensures consistent icon size */
+    line-height: 0; /* Prevents extra spacing */
+  }
+
+  .navmenu .dropdown ul a {
+    padding: 5px 5x;
+    font-size: 14px;
     text-transform: none;
     color: var(--nav-dropdown-color);
   }
@@ -311,25 +355,6 @@ h6 {
   .navmenu .dropdown ul .active:hover,
   .navmenu .dropdown ul li:hover>a {
     background-color: var(--nav-dropdown-hover-color);
-  }
-
-  .navmenu .dropdown:hover>ul {
-    opacity: 1;
-    top: 100%;
-    visibility: visible;
-  }
-
-  .navmenu .dropdown .dropdown ul {
-    top: 0;
-    left: -90%;
-    visibility: hidden;
-  }
-
-  .navmenu .dropdown .dropdown:hover>ul {
-    opacity: 1;
-    top: 0;
-    left: -100%;
-    visibility: visible;
   }
 }
 
@@ -365,23 +390,23 @@ h6 {
 
   .navmenu a,
   .navmenu a:focus {
-    color: var(--nav-dropdown-color);
-    padding: 10px 20px;
+    display: flex; /* Ensures text and icon are aligned */
+    align-items: center; /* Vertically centers the text and icon */
+    justify-content: space-between; /* Adds space between the text and icon */
+    padding: 10px 20px; /* Adjust padding for consistent spacing */
+    font-size: 16px; /* Ensure consistent font size */
     font-family: var(--nav-font);
-    font-size: 17px;
     font-weight: 500;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     white-space: nowrap;
     transition: 0.3s;
+    color: var(--nav-dropdown-color);
   }
 
   .navmenu a i,
   .navmenu a:focus i {
-    font-size: 12px;
-    line-height: 0;
-    margin-left: 5px;
+    margin-left: auto; /* Pushes the icon to the far right */
+    font-size: 14px; /* Ensures consistent icon size */
+    line-height: 1; /* Prevents extra spacing */
     width: 30px;
     height: 30px;
     display: flex;
@@ -418,7 +443,7 @@ h6 {
     border: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
     box-shadow: none;
     transition: all 0.5s ease-in-out;
-  }
+  } 
 
   .navmenu .dropdown ul ul {
     background-color: rgba(33, 37, 41, 0.1);
@@ -429,16 +454,16 @@ h6 {
     background-color: rgba(33, 37, 41, 0.03);
   }
 
-  .mobile-nav-active {
-    overflow: hidden;
+  .navmenu .dropdown ul a {
+    padding: 10px 20px; /* Adjust padding for nested dropdown items */
+    font-size: 16px; /* Ensure consistent font size */
+    display: flex; /* Align text and icon */
+    align-items: center; /* Vertically centers the text and icon */
+    justify-content: space-between; /* Adds space between the text and icon */
   }
 
-  .mobile-nav-active .mobile-nav-toggle {
-    color: #fff;
-    position: absolute;
-    font-size: 32px;
-    top: 15px;
-    right: 15px;
+  .navmenu .dropdown ul a i {
+    margin-left: auto; /* Pushes the icon to the far right */
     margin-right: 0;
     z-index: 9999;
   }
